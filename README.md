@@ -49,3 +49,7 @@ dotnet publish -c Release
 설정(창 위치·크기·토글)은 `%APPDATA%\PreciseClock\settings.json` 에 저장됩니다.
 
 KRISS 안내에 따라 개인 확인용으로만 사용하세요(상업적 이용·정밀 산업 용도 불가).
+
+## 라이선스
+
+코드는 [MIT 라이선스](LICENSE)로 공개합니다. 위의 KRISS 이용 조건은 KRISS NTP 서버 사용에 관한 것으로, 코드 라이선스와는 별개입니다.
