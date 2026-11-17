@@ -1,0 +1,52 @@
+<Window x:Class="PreciseClock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="정확한 시계"
+        Width="520" Height="170" MinWidth="160" MinHeight="60"
+        WindowStyle="None" ResizeMode="CanResize" AllowsTransparency="True"
+        Background="#0B0B0B" Foreground="#EDEDED"
+        FontFamily="Segoe UI">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0"
+                      CornerRadius="0" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Window.ContextMenu>
+        <ContextMenu Opened="OnMenuOpened">
+            <MenuItem x:Name="TopmostItem" Header="항상 위 (T)" IsCheckable="True" Click="OnTopmostClick" />
+            <MenuItem Header="밀리초 (M)">
+                <MenuItem x:Name="Ms0Item" Header="표시 안 함" Tag="0" IsCheckable="True" Click="OnMsDigitsClick" />
+                <MenuItem x:Name="Ms1Item" Header="1자리    .3" Tag="1" IsCheckable="True" Click="OnMsDigitsClick" />
+                <MenuItem x:Name="Ms2Item" Header="2자리    .38" Tag="2" IsCheckable="True" Click="OnMsDigitsClick" />
+                <MenuItem x:Name="Ms3Item" Header="3자리    .384" Tag="3" IsCheckable="True" Click="OnMsDigitsClick" />
+            </MenuItem>
+            <MenuItem x:Name="StatusItem" Header="상태 표시 (I)" IsCheckable="True" Click="OnStatusClick" />
+            <MenuItem Header="색상 설정… (C)" Click="OnColorsClick" />
+            <MenuItem Header="전체 화면 (더블클릭 / F11)" Click="OnFullscreenClick" />
+            <MenuItem Header="지금 다시 맞추기 (R)" Click="OnResyncClick" />
+            <Separator />
+            <MenuItem Header="종료" Click="OnExitClick" />
+        </ContextMenu>
+    </Window.ContextMenu>
+
+    <Grid Margin="18,6,18,8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Viewbox Stretch="Uniform" StretchDirection="Both">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="TimeText" Text="--:--:--" FontSize="100" FontWeight="Light"
+                           Typography.NumeralAlignment="Tabular" />
+                <TextBlock x:Name="MsText" Text=".000" FontSize="46" FontWeight="Light"
+                           Foreground="#7A7A7A" Margin="6,0,0,15" VerticalAlignment="Bottom"
+                           Typography.NumeralAlignment="Tabular" />
+            </StackPanel>
+        </Viewbox>
+
+        <TextBlock x:Name="StatusText" Grid.Row="1" FontSize="11" Foreground="#5A5A5A"
+                   HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" />
+    </Grid>
+</Window>

@@ -1,0 +1,110 @@
+<Window x:Class="PreciseClock.ColorSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PreciseClock"
+        Title="색상 설정" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Background="#F5F5F5" Foreground="#222222" FontFamily="Segoe UI" FontSize="12">
+    <Window.Resources>
+        <!-- 왼쪽 "바꿀 곳" 카드 -->
+        <Style x:Key="TargetCard" TargetType="RadioButton">
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="Card" Background="White" BorderBrush="#DDDDDD" BorderThickness="1"
+                                CornerRadius="6" Padding="10,8">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Card" Property="BorderBrush" Value="#B5C6E0" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Card" Property="BorderBrush" Value="#3B82F6" />
+                                <Setter TargetName="Card" Property="Background" Value="#EEF4FF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="MinWidth" Value="76" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="Foreground" Value="#222222" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Body" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" CornerRadius="5" Padding="14,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Body" Property="Opacity" Value="0.85" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Body" Property="Opacity" Value="0.7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Primary" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#3B82F6" />
+            <Setter Property="BorderBrush" Value="#3B82F6" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style x:Key="Hint" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#808080" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="20,16,20,18">
+        <TextBlock FontSize="16" FontWeight="SemiBold" Text="색상 설정" />
+        <TextBlock Style="{StaticResource Hint}" Margin="0,3,0,14"
+                   Text="① 왼쪽에서 바꿀 곳을 고르고  ② 오른쪽에서 색을 고르세요. 시계에 바로 미리 보이고, [확인]을 눌러야 저장됩니다." />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="236" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel x:Name="TargetList" />
+                <Border Margin="0,6,0,0" Padding="10,8" CornerRadius="6" Background="#FFF8E6" BorderBrush="#F0DFB0" BorderThickness="1">
+                    <TextBlock Style="{StaticResource Hint}" Foreground="#7A6420" FontSize="11"
+                               Text="투명도: 오른쪽 체크무늬 막대를 내리면 투명해져요. 배경을 0%로 해도 창을 잡아 옮길 수 있게 눈에 안 보일 만큼만 남겨 둡니다." />
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Column="1" Margin="16,0,0,0" Padding="16,14" CornerRadius="6"
+                    Background="White" BorderBrush="#DDDDDD" BorderThickness="1">
+                <local:ColorPicker x:Name="Picker" />
+            </Border>
+        </Grid>
+
+        <TextBlock Margin="0,18,0,0" FontWeight="SemiBold" Text="빠른 테마" />
+        <TextBlock Style="{StaticResource Hint}" Margin="0,2,0,8"
+                   Text="누르면 네 가지 색이 한 번에 바뀝니다. 고른 다음 위에서 더 다듬어도 돼요." />
+        <WrapPanel x:Name="ThemeList" />
+
+        <DockPanel Margin="0,18,0,0" LastChildFill="False">
+            <Button Margin="0" Content="기본값으로" Click="OnResetClick" ToolTip="처음 설치했을 때의 색으로 되돌립니다" />
+            <Button DockPanel.Dock="Right" Style="{StaticResource Primary}" Content="확인" Click="OnOkClick" />
+            <Button DockPanel.Dock="Right" Content="취소" IsCancel="True" ToolTip="바꾼 내용을 버리고 닫습니다 (Esc)" />
+        </DockPanel>
+    </StackPanel>
+</Window>

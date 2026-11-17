@@ -1,0 +1,26 @@
+<Application x:Class="PreciseClock.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnMainWindowClose">
+    <Application.Resources>
+        <!-- 투명한 부분이 보이도록 색 아래 깔아 두는 체크무늬 -->
+        <DrawingBrush x:Key="Checker" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="White" Geometry="M0,0 H2 V2 H0Z" />
+                    <GeometryDrawing Brush="#D6D6D6" Geometry="M0,0 H1 V1 H0Z M1,1 H2 V2 H1Z" />
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
+        <!-- 테마 미리보기용 어두운 체크무늬: 투명 테마의 흰 글자가 보이도록 -->
+        <DrawingBrush x:Key="DarkChecker" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#4A4A4A" Geometry="M0,0 H2 V2 H0Z" />
+                    <GeometryDrawing Brush="#5E5E5E" Geometry="M0,0 H1 V1 H0Z M1,1 H2 V2 H1Z" />
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Application.Resources>
+</Application>
